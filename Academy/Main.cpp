@@ -42,5 +42,5 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	Human human("Montana", "Antonio", 25);
-	human.print();
+	human.print(); 
 }
