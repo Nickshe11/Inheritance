@@ -42,9 +42,9 @@ public:
 };
 
 #define STUDENT_TAKE_PARAMETERS const std::string& specialty, const std::string& group, double rating, double attendance
-#define student_take_parameters specialty, group, rating, attendance
+#define STUDENT_GIVE_PARAMETERS specialty, group, rating, attendance
 
-class Student :public Human
+class Student : public Human
 {
 	std::string specialty;
 	std::string group;
@@ -104,7 +104,10 @@ public:
 	}
 };
 
-class Teacher :public Human
+#define TEACHER_TAKE_PARAMETERS const std::string& specialty, unsigned int experience
+#define TEACHER_GIVE_PARAMETERS specialty, experience
+
+class Teacher : public Human
 {
 	std::string specialty;
 	unsigned int experience;
@@ -147,6 +150,38 @@ public:
 	}
 };
 
+class Graduate : public Student
+{
+	std::string topic;
+
+public:
+	const std::string& get_topic()const
+	{
+		return topic;
+	}
+	void set_topic(const std::string& topic)
+	{
+		this->topic = topic;
+	}
+	//Constructors:
+	Graduate(HUMAN_TAKE_PARAMETERS, STUDENT_TAKE_PARAMETERS, const std::string& topic) : Student(HUMAN_GIVE_PARAMETERS, STUDENT_GIVE_PARAMETERS)
+	{
+		this->topic = topic;
+	}
+	~Graduate()
+	{
+		cout << "GDestructor:\t" << this << endl;
+	}
+	//Methods
+	void print()const
+	{
+		cout << "Выпускник " << endl;
+		Student::print();
+		cout<< "Тема работы " << topic << endl;
+	}
+};
+
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -158,4 +193,8 @@ void main()
 	cout << delimiter << endl;
 	Teacher professor("White", "Walter", 50, "Chemistry", 20);
 	professor.print();
+	cout << delimiter << endl;
+
+	Graduate gr("Vercetti", "Tommy", 25, "Chemistry", "WW220", 90, 95, "Поиск поклажи в условиях городской застройки");
+	gr.print();
 }
