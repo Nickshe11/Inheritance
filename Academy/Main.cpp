@@ -5,11 +5,24 @@ using namespace std;
 #define delimiter "\n__________________\n"
 #define HUMAN_TAKE_PARAMETERS const std::string& last_name, const std::string& first_name, unsigned int age
 #define HUMAN_GIVE_PARAMETERS last_name, first_name, age
+
+class Human;
+class Teacher;
+class Student;
+class Graduate;
+
+std::ostream& operator<<(std::ostream& os, const Human& obj);
+std::ostream& operator<<(std::ostream& os, const Student& obj);
+std::ostream& operator<<(std::ostream& os, const Teacher& obj);
+std::ostream& operator<<(std::ostream& os, const Graduate& obj);
+
+
 class Human
 {
 	std::string last_name;
 	std::string first_name;
 	unsigned int age;
+	friend std::ostream& operator<<(std::ostream& os, const Human& obj);
 public:
 	const std::string& get_last_name()const
 	{
@@ -203,6 +216,7 @@ std::ostream& operator<<(std::ostream& os, const Graduate& obj)
 }
 
 
+
 //#define INHERITANCE
 
 void main()
@@ -236,12 +250,12 @@ void main()
 	//Specialisation (DownCast)
 	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 	{
-		//group[i]->print();
+		group[i]->print();
 		//cout << *group[i] << endl;
-		cout << typeid(*group[i]).name() << endl;
-		if (typeid(*group[i]) == typeid(Student))cout << *dynamic_cast<Student*>(group[i]) << endl;
+		//cout << typeid(*group[i]).name() << endl;
+		/*if (typeid(*group[i]) == typeid(Student))cout << *dynamic_cast<Student*>(group[i]) << endl;
 		if (typeid(*group[i]) == typeid(Graduate))cout << *dynamic_cast<Graduate*>(group[i]) << endl;
-		if (typeid(*group[i]) == typeid(Teacher))cout << *dynamic_cast<Teacher*>(group[i]) << endl;
+		if (typeid(*group[i]) == typeid(Teacher))cout << *dynamic_cast<Teacher*>(group[i]) << endl;*/
 		cout << delimiter << endl;
 	}
 
