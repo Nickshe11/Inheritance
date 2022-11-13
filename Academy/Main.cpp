@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 #include <string>
+#include<fstream>
 using namespace std;
 
 #define delimiter "\n__________________\n"
@@ -216,15 +217,27 @@ void main()
 		new Teacher("Einstein", "Albert", 143, "Astronomy", 100)
 	};
 	//Specialisation (DownCast)
+	//for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
+	//{
+	//	cout << *group[i] << endl;
+	//	//group[i]->print();
+	//	cout << delimiter << endl;
+	//}
+
+	std::ofstream fout; 
+	fout.open("Academy.txt", std::ios::app); 
 	for (int i = 0; i < sizeof(group) / sizeof(Human*); i++)
 	{
-		cout << *group[i] << endl;
-		//group[i]->print();
-		cout << delimiter << endl;
+	fout << *group[i] << endl;
+	fout << delimiter << endl;
 	}
+	fout.close(); 
+
 
 	for (int i = 0; i < sizeof(group) / sizeof(group[0]); i++)
 	{
 		delete group[i];
 	}
+	
+	system("notepad Academy.txt");
 }
