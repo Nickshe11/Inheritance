@@ -1,0 +1,6 @@
+class Student  :	Pinkman Jessie         25 Chemistry                WW220           90      95
+class Teacher  :	White Walter           50 Chemistry                   20
+class Graduate :	Vercetti Tommy         25 Chemistry                WW220           90      95 Поиск поклажи в условиях городской застройки
+class Student  :	Vercetti Tomas         30 Criminalistic            Vice            98      99
+class Teacher  :	Diaz Ricardo           50 Weapons distribution        15
+class Teacher  :	Einstein Albert       143 Astronomy                  100
