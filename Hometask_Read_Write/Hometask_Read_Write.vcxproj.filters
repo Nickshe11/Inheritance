@@ -20,8 +20,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="File.txt">
+    <Text Include="RAW.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="READY.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="201.dhcpd">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a8312f68-3f04-415c-ac00-b2eb36fb68e5}</ProjectGuid>
-    <RootNamespace>Files</RootNamespace>
+    <ProjectGuid>{f0d3db2f-f3ba-4ecb-85b7-6c12696f6338}</ProjectGuid>
+    <RootNamespace>HometaskReadWrite</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,7 +142,11 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="File.txt" />
+    <Text Include="RAW.txt" />
+    <Text Include="READY.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="201.dhcpd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
