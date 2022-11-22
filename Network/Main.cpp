@@ -69,17 +69,20 @@ void main()
 		for (int i = 1; !fin.eof(); i++)
 		{
 			fin >> sz_ip_buffer >> sz_mac_buffer;
+			if (sz_ip_buffer == 0 || sz_mac_buffer == 0)continue;
+			//break прерывает текущую операцию и все последующие, 
+			//continue прерывает текущую операцию и переходит к следующей
 			for (int i = 0; sz_mac_buffer[i]; i++)
 			{
 				if (sz_mac_buffer[i] == '-')sz_mac_buffer[i] = ':';
 			}
-			cout << number << "-" << i << endl;
+			cout <<"host " << number << "-" << i << endl;
 			cout << "{\n";
 			cout << "\thardware ethernet\t" << sz_mac_buffer << ";\n";
 			cout << "\tfixed address\t\t" << sz_ip_buffer << ";\n";
 			cout << "}\n";
 
-			fout << number << "-" << i << endl;
+			fout <<"host " << number << "-" << i << endl;
 			fout << "{\n";
 			fout << "\thardware ethernet\t" << sz_mac_buffer << ";\n";
 			fout << "\tfixed address\t\t" << sz_ip_buffer << ";\n";
