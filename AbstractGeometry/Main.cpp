@@ -269,7 +269,7 @@ namespace Geometry
 		virtual double get_height()const = 0;
 		void info()const
 		{
-			cout << "Height:" << get_height()<<endl;
+			cout << "Height:" << get_height() << endl;
 			Shape::info();
 		}
 	};
@@ -330,6 +330,151 @@ namespace Geometry
 		{
 			cout << typeid(*this).name() << endl;
 			cout << "Side: " << side << endl;
+			cout << "Height: " << get_height() << endl;
+			Triangle::info();
+		}
+	};
+
+	class RightTriangle :public Triangle
+	{
+		double height;
+		double base;
+	public:
+		double get_height()const
+		{
+			return height;
+		}
+		double get_base()const
+		{
+			return base;
+		}
+		void set_height(double height)
+		{
+			if (height < 20)height = 20;
+			if (height > 200)height = 200;
+			this->height = height;
+		}
+		void set_base(double base)
+		{
+			if (base < 20)base = 20;
+			if (base > 200)base = 200;
+			this->base = base;
+		}
+		RightTriangle(double height, double base, unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color) :
+			Triangle(start_x, start_y, line_width, color)
+		{
+			set_height(height);
+			set_base(base);
+		}
+		~RightTriangle() {}
+
+		double get_area()const override
+		{
+			return height * base / 2;
+		}
+		double get_perimeter()const override
+		{
+			return height + base + (sqrt(height * height + base * base));
+		}
+		void draw()const override
+		{
+			HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);
+			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
+			HBRUSH hBrush = CreateSolidBrush(color);
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
+
+			POINT vert[] =
+			{
+				{start_x, start_y + height},
+				{start_x + base, start_y + height},
+				{start_x , start_y }
+			};
+			::Polygon(hdc, vert, 3);
+
+			DeleteObject(hPen);
+			DeleteObject(hBrush);
+			ReleaseDC(hwnd, hdc);
+		}
+		void info()const
+		{
+			cout << typeid(*this).name() << endl;
+			cout << "Высота: " << height << endl;
+			cout << "Основание: " << base << endl;
+			Triangle::info();
+		}
+	};
+	class IsoscelesTriangle :public Triangle
+	{
+		double side;
+		double base;
+	public:
+		double get_side()const
+		{
+			return side;
+		}
+		double get_base()const
+		{
+			return base;
+		}
+		void set_side(double side)
+		{
+			if (side < 20)side = 20;
+			if (side > 200)side = 200;
+			this->side = side;
+		}
+		void set_base(double base)
+		{
+			if (base < 20)base = 20;
+			if (base > 200)base = 200;
+			this->base = base;
+		}
+		IsoscelesTriangle(double side,double base, unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color) :
+			Triangle(start_x, start_y, line_width, color)
+		{
+			set_side(side);
+			set_base(base);
+		}
+		~IsoscelesTriangle() {}
+		double get_height()const override
+		{
+			return sqrt(side*side-base/base/4);
+		}
+		double get_area()const override
+		{
+			return base * get_height() / 2;
+		}
+		double get_perimeter()const override
+		{
+			return side * 2+base;
+		}
+		void draw()const override
+		{
+			HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);
+			HPEN hPen = CreatePen(PS_SOLID, line_width, color);
+			HBRUSH hBrush = CreateSolidBrush(color);
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
+
+			POINT vert[] =
+			{
+				{start_x, start_y + get_height()},
+				{start_x + base, start_y + get_height()},
+				{start_x + base / 2, start_y }
+			};
+			::Polygon(hdc, vert, 3);
+
+			DeleteObject(hPen);
+			DeleteObject(hBrush);
+			ReleaseDC(hwnd, hdc);
+		}
+		void info()const
+		{
+			cout << typeid(*this).name() << endl;
+			cout << "Сторона: " << side << endl;
+			cout << "Основание: " << base << endl;
 			cout << "Height: " << get_height() << endl;
 			Triangle::info();
 		}
@@ -450,6 +595,10 @@ void main()
 	round.info();*/
 	Geometry::Circle circle(100, 700, 100, 11, Geometry::Color::yellow);
 	circle.info();
-	Geometry::EquilateralTriangle e_try(170, 350, 200, 8, Geometry::Color::green);
-	e_try.info();
+	/*Geometry::EquilateralTriangle e_try(170, 350, 200, 8, Geometry::Color::green);
+	e_try.info();*/
+	/*Geometry::RightTriangle r_try(170, 170, 350, 200, 8, Geometry::Color::green);
+	r_try.info();*/
+	Geometry::IsoscelesTriangle i_try(170, 170, 350, 200, 8, Geometry::Color::green);
+	i_try.info();
 }
