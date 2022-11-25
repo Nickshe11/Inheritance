@@ -70,7 +70,7 @@ namespace Geometry
 		{
 			cout << "Площадь фигуры: " << get_area() << endl;
 			cout << "Периметр фигуры: " << get_perimeter() << endl;
-			draw();
+			//draw();
 		}
 	};
 
@@ -332,6 +332,10 @@ namespace Geometry
 			cout << "Side: " << side << endl;
 			cout << "Height: " << get_height() << endl;
 			Triangle::info();
+			while (true)
+			{
+			draw();
+			}
 		}
 	};
 
