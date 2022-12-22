@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include<fstream>
 using namespace std;
 
@@ -9,24 +9,24 @@ void main()
 {
 	setlocale(LC_ALL, "");
 #ifdef WRITE_TO_FILE
-	std::ofstream fout; //Создаем поток
-	fout.open("File.txt", std::ios::app); //Открываем поток
-	//std::ios::app - append, не переписывать файлб а дописывать в файл
-	// Пишем в поток
+	std::ofstream fout; //РЎРѕР·РґР°РµРј РїРѕС‚РѕРє
+	fout.open("File.txt", std::ios::app); //РћС‚РєСЂС‹РІР°РµРј РїРѕС‚РѕРє
+	//std::ios::app - append, РЅРµ РїРµСЂРµРїРёСЃС‹РІР°С‚СЊ С„Р°Р№Р»Р± Р° РґРѕРїРёСЃС‹РІР°С‚СЊ РІ С„Р°Р№Р»
+	// РџРёС€РµРј РІ РїРѕС‚РѕРє
 	fout << "Hello Files!" << endl;
-	fout.close(); // Закрываем поток
+	fout.close(); // Р—Р°РєСЂС‹РІР°РµРј РїРѕС‚РѕРє
 
-	system("notepad File.txt"); //Функция system() запускает любую программу, к которой есть path в windows
+	system("notepad File.txt"); //Р¤СѓРЅРєС†РёСЏ system() Р·Р°РїСѓСЃРєР°РµС‚ Р»СЋР±СѓСЋ РїСЂРѕРіСЂР°РјРјСѓ, Рє РєРѕС‚РѕСЂРѕР№ РµСЃС‚СЊ path РІ windows
 #endif // WRITE_TO_FILE
 
 	ifstream fin("File.txt");
 	if (fin.is_open())
 	{
-		//Будем читать файл
-		const int SIZE = 256; // Размер буфера может быть побольше, если текст в файле будет много текста
+		//Р‘СѓРґРµРј С‡РёС‚Р°С‚СЊ С„Р°Р№Р»
+		const int SIZE = 256; // Р Р°Р·РјРµСЂ Р±СѓС„РµСЂР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РїРѕР±РѕР»СЊС€Рµ, РµСЃР»Рё С‚РµРєСЃС‚ РІ С„Р°Р№Р»Рµ Р±СѓРґРµС‚ РјРЅРѕРіРѕ С‚РµРєСЃС‚Р°
 		char buffer[SIZE] = {};
 		cout << typeid(fin.tellg()).name() << endl;
-		while (!fin.eof())//eof - enfd of file (положение курсора на -1 - это конец файла)
+		while (!fin.eof())//eof - enfd of file (РїРѕР»РѕР¶РµРЅРёРµ РєСѓСЂСЃРѕСЂР° РЅР° -1 - СЌС‚Рѕ РєРѕРЅРµС† С„Р°Р№Р»Р°)
 		{
 			//fin >> buffer;
 			cout << fin.tellg() << "\t";
