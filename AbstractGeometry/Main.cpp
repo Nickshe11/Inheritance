@@ -1,7 +1,11 @@
 ﻿#define _USE_MATH_DEFINES
 #include<iostream>
+#include<ctime>
 #include<Windows.h>//библиотека для манипулирования цыетом консоли
 using namespace std;
+
+#define RAND rand()%500
+#define COLOR RGB(rand(), rand(), rand())
 
 namespace Geometry
 {
@@ -334,7 +338,7 @@ namespace Geometry
 			Triangle::info();
 			while (true)
 			{
-			draw();
+				draw();
 			}
 		}
 	};
@@ -434,7 +438,7 @@ namespace Geometry
 			if (base > 200)base = 200;
 			this->base = base;
 		}
-		IsoscelesTriangle(double side,double base, unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color) :
+		IsoscelesTriangle(double side, double base, unsigned int start_x, unsigned int start_y, unsigned int line_width, Color color) :
 			Triangle(start_x, start_y, line_width, color)
 		{
 			set_side(side);
@@ -443,7 +447,7 @@ namespace Geometry
 		~IsoscelesTriangle() {}
 		double get_height()const override
 		{
-			return sqrt(side*side-base/base/4);
+			return sqrt(side * side - base / base / 4);
 		}
 		double get_area()const override
 		{
@@ -451,7 +455,7 @@ namespace Geometry
 		}
 		double get_perimeter()const override
 		{
-			return side * 2+base;
+			return side * 2 + base;
 		}
 		void draw()const override
 		{
@@ -586,23 +590,56 @@ namespace Geometry
 	//		Shape::info();
 	//	}
 	//}; 
+	Shape* Factory(int type)
+	{
+		switch (type)
+		{
+		//case 1: return new Square(rand(), rand(), rand(), rand(), (Color)rand()); break;
+		case 0: return new Rectangle(RAND, rand()%500, rand() % 500, RAND, RAND, (Color)COLOR); break;
+		case 1: return new Circle(RAND, rand() % 500, rand() % 500, RAND, (Color)COLOR); break;
+		case 2: return new EquilateralTriangle(RAND, rand() % 500, rand() % 500, RAND, (Color)COLOR); break;
+		}
+	}
 }
+
 
 void main()
 {
 	setlocale(LC_ALL, "");
-	Geometry::Square square(8, 100, 100, 11, Geometry::Color::console_red);
-	square.info();
-	Geometry::Rectangle rect(150, 70, 300, 100, 11, Geometry::Color::grey);
-	rect.info();
-	/*Geometry::Circle round(5, Geometry::Color::console_green);
-	round.info();*/
-	Geometry::Circle circle(100, 700, 100, 11, Geometry::Color::yellow);
-	circle.info();
-	/*Geometry::EquilateralTriangle e_try(170, 350, 200, 8, Geometry::Color::green);
-	e_try.info();*/
-	/*Geometry::RightTriangle r_try(170, 170, 350, 200, 8, Geometry::Color::green);
-	r_try.info();*/
-	Geometry::IsoscelesTriangle i_try(170, 170, 350, 200, 8, Geometry::Color::green);
-	i_try.info();
+
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD coord;
+	SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &coord);
+
+	srand(time(NULL));
+	//Geometry::Square square(8, 100, 100, 11, Geometry::Color::console_red);
+	//square.info();
+	//Geometry::Rectangle rect(150, 70, 300, 100, 11, Geometry::Color::grey);
+	//rect.info();
+	///*Geometry::Circle round(5, Geometry::Color::console_green);
+	//round.info();*/
+	//Geometry::Circle circle(100, 700, 100, 11, Geometry::Color::yellow);
+	//circle.info();
+	///*Geometry::EquilateralTriangle e_try(170, 350, 200, 8, Geometry::Color::green);
+	//e_try.info();*/
+	///*Geometry::RightTriangle r_try(170, 170, 350, 200, 8, Geometry::Color::green);
+	//r_try.info();*/
+	//Geometry::IsoscelesTriangle i_try(170, 170, 350, 200, 8, Geometry::Color::green);
+	//i_try.info();
+	const int n = 5;
+	Geometry::Shape* shape[n];
+	for (int i = 0; i < n; i++)
+	{
+		shape[i] = Geometry::Factory(rand() % 3);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		shape[i]->draw();
+		Sleep(100);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		delete shape[i];
+	}
+
 }
